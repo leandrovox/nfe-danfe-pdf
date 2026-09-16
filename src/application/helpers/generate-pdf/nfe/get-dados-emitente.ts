@@ -90,12 +90,12 @@ export async function getDadosEmitente({
 
   if (pathLogo !== undefined) {
     if (folha === 0) {
-      doc.image(pathLogo, margemEsquerda + ajusteX + 4.5, margemTopo + ajusteY + DEFAULT_NFE.ajusteYDoLogotipo + 78, {
-        fit: [60, 60]
+      doc.image(pathLogo, margemEsquerda + ajusteX + 1.4, margemTopo + ajusteY + DEFAULT_NFE.ajusteYDoLogotipo + 68, {
+        fit: [90, 90]
       });
     } else {
       doc.image(pathLogo, margemEsquerda + ajusteX + 4.5, margemTopo + ajusteY + DEFAULT_NFE.ajusteYDoLogotipo + 33, {
-        fit: [60, 60]
+        fit: [90, 90]
       });
     }
   }
@@ -107,7 +107,7 @@ export async function getDadosEmitente({
     y: identificacaoDoEmitenteY + DEFAULT_NFE.ajusteYDaIdentificacaoDoEmitente,
     largura: identificacaoDoEmitenteLargura,
     alinhamento: 'center',
-    tamanho: 10 + identificacaoDoEmitenteFonte,
+    tamanho: 14 + identificacaoDoEmitenteFonte,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -120,7 +120,7 @@ export async function getDadosEmitente({
     y: doc.y - margemTopo + 2,
     largura: identificacaoDoEmitenteLargura,
     alinhamento: 'center',
-    tamanho: 8 + identificacaoDoEmitenteFonte,
+    tamanho: 10 + identificacaoDoEmitenteFonte,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -133,60 +133,47 @@ export async function getDadosEmitente({
     y: doc.y - margemTopo,
     largura: identificacaoDoEmitenteLargura,
     alinhamento: 'center',
-    tamanho: 8 + identificacaoDoEmitenteFonte,
+    tamanho: 10 + identificacaoDoEmitenteFonte,
     ajusteX,
     ajusteY,
     margemEsquerda,
     margemTopo
   });
 
-  if (emit.enderEmit && emit.enderEmit.fone !== undefined) {
-    // Separar telefone e celular se vier concatenado com /
+if (emit.enderEmit && emit.enderEmit.fone !== undefined) {
   const [tel, cel] = emit.enderEmit.fone.split('/')
   
+  // Telefones lado a lado na mesma linha
+  const foneTexto = cel 
+    ? `${formatPhone(tel.trim())} / ${formatPhone(cel.trim())}`
+    : formatPhone(tel.trim())
+
   normal({
     doc,
-    value: formatPhone(tel.trim()),
+    value: foneTexto,
     x: identificacaoDoEmitenteX,
     y: doc.y - margemTopo + 2,
     largura: identificacaoDoEmitenteLargura,
     alinhamento: 'center',
-    tamanho: 8 + identificacaoDoEmitenteFonte,
+    tamanho: 10 + identificacaoDoEmitenteFonte,
     ajusteX,
     ajusteY,
     margemEsquerda,
     margemTopo
   });
+}
 
-  // Celular — só exibe se vier o segundo número após /
-  if (cel) {
-    normal({
-      doc,
-      value: formatPhone(cel.trim()),
-      x: identificacaoDoEmitenteX,
-      y: doc.y - margemTopo + 1,
-      largura: identificacaoDoEmitenteLargura,
-      alinhamento: 'center',
-      tamanho: 8 + identificacaoDoEmitenteFonte,
-      ajusteX,
-      ajusteY,
-      margemEsquerda,
-      margemTopo
-    });
-  }
-
-  }
-
-  // Email do emitente — só exibe se existir
-if (emit. email) {
+// Email — buscar em emit.enderEmit.email (não emit.email)
+const emailEmitente = emit.email
+if (emailEmitente) {
   normal({
     doc,
-    value: emit.email,
+    value: emailEmitente,
     x: identificacaoDoEmitenteX,
     y: doc.y - margemTopo + 1,
     largura: identificacaoDoEmitenteLargura,
     alinhamento: 'center',
-    tamanho: 8 + identificacaoDoEmitenteFonte,
+    tamanho: 10 + identificacaoDoEmitenteFonte,
     ajusteX,
     ajusteY,
     margemEsquerda,
