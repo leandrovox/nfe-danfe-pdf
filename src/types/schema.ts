@@ -598,6 +598,7 @@ export interface TNFeInfNFeEmit {
   IM: string;
   CNAE?: string;
   CRT: TNFeInfNFeEmitCRT;
+  email?: string;  // ← adicionar aqui
 }
 export interface TNFeInfNFeTransp {
   modFrete: '0' | '1' | '2' | '3' | '4' | '9';

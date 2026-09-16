@@ -107,7 +107,7 @@ export async function getDadosEmitente({
     y: identificacaoDoEmitenteY + DEFAULT_NFE.ajusteYDaIdentificacaoDoEmitente,
     largura: identificacaoDoEmitenteLargura,
     alinhamento: 'center',
-    tamanho: 8 + identificacaoDoEmitenteFonte,
+    tamanho: 10 + identificacaoDoEmitenteFonte,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -120,7 +120,7 @@ export async function getDadosEmitente({
     y: doc.y - margemTopo + 2,
     largura: identificacaoDoEmitenteLargura,
     alinhamento: 'center',
-    tamanho: 6 + identificacaoDoEmitenteFonte,
+    tamanho: 8 + identificacaoDoEmitenteFonte,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -133,7 +133,7 @@ export async function getDadosEmitente({
     y: doc.y - margemTopo,
     largura: identificacaoDoEmitenteLargura,
     alinhamento: 'center',
-    tamanho: 6 + identificacaoDoEmitenteFonte,
+    tamanho: 8 + identificacaoDoEmitenteFonte,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -141,20 +141,58 @@ export async function getDadosEmitente({
   });
 
   if (emit.enderEmit && emit.enderEmit.fone !== undefined) {
+    // Separar telefone e celular se vier concatenado com /
+  const [tel, cel] = emit.enderEmit.fone.split('/')
+  
+  normal({
+    doc,
+    value: formatPhone(tel.trim()),
+    x: identificacaoDoEmitenteX,
+    y: doc.y - margemTopo + 2,
+    largura: identificacaoDoEmitenteLargura,
+    alinhamento: 'center',
+    tamanho: 8 + identificacaoDoEmitenteFonte,
+    ajusteX,
+    ajusteY,
+    margemEsquerda,
+    margemTopo
+  });
+
+  // Celular — só exibe se vier o segundo número após /
+  if (cel) {
     normal({
       doc,
-      value: 'Telefone: ' + formatPhone(emit.enderEmit.fone),
+      value: formatPhone(cel.trim()),
       x: identificacaoDoEmitenteX,
-      y: doc.y - margemTopo + 2,
+      y: doc.y - margemTopo + 1,
       largura: identificacaoDoEmitenteLargura,
       alinhamento: 'center',
-      tamanho: 6 + identificacaoDoEmitenteFonte,
+      tamanho: 8 + identificacaoDoEmitenteFonte,
       ajusteX,
       ajusteY,
       margemEsquerda,
       margemTopo
     });
   }
+
+  }
+
+  // Email do emitente — só exibe se existir
+if (emit. email) {
+  normal({
+    doc,
+    value: emit.email,
+    x: identificacaoDoEmitenteX,
+    y: doc.y - margemTopo + 1,
+    largura: identificacaoDoEmitenteLargura,
+    alinhamento: 'center',
+    tamanho: 8 + identificacaoDoEmitenteFonte,
+    ajusteX,
+    ajusteY,
+    margemEsquerda,
+    margemTopo
+  });
+}
 
   normal({
     doc,
