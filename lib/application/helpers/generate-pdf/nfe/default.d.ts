@@ -1,0 +1,23 @@
+export declare const DEFAULT_NFE: {
+    larguraDaPagina: number;
+    alturaDaPagina: number;
+    tamanhoDaFonteDoTitulo: number;
+    corDoTitulo: string;
+    alinhamentoDoTitulo: "left";
+    alinhamentoDoTituloDaTabela: "center";
+    tamanhoDaFonteDaSecao: number;
+    corDaSecao: string;
+    tamanhoDaFonteDoCampo: number;
+    alinhamentoDoCampo: "center";
+    corDoCampo: string;
+    tamanhoDaFonteDosItens: number;
+    separadorDeItens: boolean;
+    ajusteYDoLogotipo: number;
+    ajusteYDaIdentificacaoDoEmitente: number;
+    opacidadeDaHomologacao: number;
+    ajusteYDaHomologacao: number;
+    tamanhoDoCodigoDeBarras: number;
+    corDoLayout: string;
+    finalTamanhoDet1: number;
+    finalTamanhoDetDemais: number;
+};
