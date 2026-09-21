@@ -27,12 +27,14 @@ export async function pdfNFe(nf: NFeProc, opcoes?: OpcoesPDF): Promise<PDFKit.PD
     margemTopo,
     pathLogo: opcoes?.pathLogo,
     cancelada: opcoes?.cancelada,
-    textoRodape: opcoes?.textoRodape
+    textoRodape: opcoes?.textoRodape,
+    emailEmitente: opcoes?.emailEmitente,
+    celularEmitente: opcoes?.celularEmitente
   });
 
   const paginas = doc.bufferedPageRange();
   for (let i = paginas.start; i < paginas.start + paginas.count; i++) {
-    doc.switchToPage(i);
+    doc.switchToPage(i);  
     italico({
       doc,
       value: `FOLHA ${i + 1}/${paginas.start + paginas.count}`,

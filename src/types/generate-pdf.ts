@@ -14,6 +14,8 @@ export type OpcoesPDF = {
   pathLogo?: string;
   cancelada?: boolean;
   textoRodape?: string;
+  emailEmitente?: string;
+  celularEmitente?: string;
 };
 
 export declare namespace GeneratePdf {
@@ -51,6 +53,8 @@ export declare namespace GeneratePdf {
     pathLogo?: string;
     cancelada?: boolean;
     textoRodape?: string;
+    emailEmitente?: string;
+    celularEmitente?: string;
   };
   type InputCriaLayout = {
     doc: PDFKit.PDFDocument;
@@ -65,6 +69,8 @@ export declare namespace GeneratePdf {
     pathLogo?: string;
     cancelada?: boolean;
     textoRodape?: string;
+    emailEmitente?: string;
+    celularEmitente?: string;
   };
   type InputTitulo = {
     x: number;
@@ -189,6 +195,8 @@ export declare namespace GeneratePdf {
     protNFe: ProtNFe;
     pathLogo?: string;
     folha?: number;
+    emailEmitente?: string;
+    celularEmitente?: string;
   };
   type InputRemetenteDestinatario = {
     y: number;

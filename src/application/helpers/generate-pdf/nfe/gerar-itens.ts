@@ -18,7 +18,9 @@ export async function gerarItens({
   larguraDoFormulario,
   pathLogo,
   cancelada,
-  textoRodape
+  textoRodape,
+  emailEmitente,
+  celularEmitente
 }: GeneratePdf.InputCriaMargem): Promise<void> {
   let folha = 0;
   await criaLayout({
@@ -33,7 +35,9 @@ export async function gerarItens({
     pathLogo,
     folha,
     cancelada,
-    textoRodape
+    textoRodape,
+    emailEmitente,
+    celularEmitente
   });
 
   let maiorY = doc.y;

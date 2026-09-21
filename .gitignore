@@ -1,6 +1,5 @@
 node_modules/
 dist/
-lib/
 .env
 danfe.pdf
 *-lock.json

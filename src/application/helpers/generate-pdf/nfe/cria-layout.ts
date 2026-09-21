@@ -24,7 +24,9 @@ export async function criaLayout({
   margemDireita,
   folha,
   cancelada,
-  textoRodape
+  textoRodape,
+  emailEmitente = '',
+  celularEmitente = ''
 }: GeneratePdf.InputCriaLayout): Promise<void> {
   const { dest, emit, ide, infAdic, total, transp, cobr } = nf.NFe.infNFe;
   let y = 0;
@@ -75,7 +77,9 @@ export async function criaLayout({
     y,
     pathLogo,
     ide,
-    folha
+    folha,
+    emailEmitente,
+    celularEmitente
   });
 
   y = getDestinatarioRemetente({

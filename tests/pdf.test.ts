@@ -4,7 +4,7 @@ import { gerarPDF } from '../src';
 
 async function gerarPDFTeste(
   nomeArquivo: string,
-  opcoes: { pathLogo?: string; cancelada?: boolean; textoRodape?: string } = {}
+  opcoes: { pathLogo?: string; cancelada?: boolean; textoRodape?: string, emailEmitente?: string, celularEmitente?: string } = {}
 ): Promise<void> {
   const pathDoArquivoPdf = path.join(process.cwd(), nomeArquivo);
   const pathDoArquivoXml = path.join(__dirname, 'arquivos', 'arquivo-xml.xml');
@@ -12,6 +12,7 @@ async function gerarPDFTeste(
   const xmlNFe = fs.readFileSync(pathDoArquivoXml).toString();
 
   console.log(`Gerando ${nomeArquivo}...`);
+  console.log('Opções:', opcoes);
   const pdf = await gerarPDF(xmlNFe, { pathLogo, ...opcoes });
   pdf.pipe(fs.createWriteStream(pathDoArquivoPdf));
 
@@ -40,7 +41,9 @@ async function executarTestes(): Promise<void> {
     // Teste 4: DANFE completo (com logo, rodapé e nota cancelada)
     await gerarPDFTeste('danfe-completo.pdf', {
       cancelada: false,
-      textoRodape: 'Meu Sistema Danfe'
+      textoRodape: 'Meu Sistema Danfe',
+      emailEmitente: 'teste@email.com',
+      celularEmitente: '(11) 91234-5678'
     });
 
     // Teste 5: DANFE apenas com data/hora (sem texto personalizado)

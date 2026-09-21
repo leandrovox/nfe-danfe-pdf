@@ -30,7 +30,9 @@ export async function getDadosEmitente({
   protNFe,
   pathLogo,
   ide,
-  folha
+  folha,
+  emailEmitente,
+  celularEmitente
 }: GeneratePdf.InputDadosEmitente): Promise<void> {
   // Desenhar retângulo arredondado da seção principal
   doc
@@ -141,11 +143,12 @@ export async function getDadosEmitente({
   });
 
 if (emit.enderEmit && emit.enderEmit.fone !== undefined) {
-  const [tel, cel] = emit.enderEmit.fone.split('/')
+  const [tel, cel] = emit.enderEmit.fone.split('/');
+  console.log('Telefone do emitente:', tel);
   
   // Telefones lado a lado na mesma linha
-  const foneTexto = cel 
-    ? `${formatPhone(tel.trim())} / ${formatPhone(cel.trim())}`
+  const foneTexto = celularEmitente 
+    ? `${formatPhone(tel.trim())} / ${formatPhone(celularEmitente.trim())}`
     : formatPhone(tel.trim())
 
   normal({
@@ -164,7 +167,7 @@ if (emit.enderEmit && emit.enderEmit.fone !== undefined) {
 }
 
 // Email — buscar em emit.enderEmit.email (não emit.email)
-const emailEmitente = emit.email
+console.log('Email do emitente:', emailEmitente);
 if (emailEmitente) {
   normal({
     doc,
